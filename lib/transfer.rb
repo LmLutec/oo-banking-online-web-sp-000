@@ -7,10 +7,22 @@ class Transfer
     @receiver = receiver
     @status = "pending"
     @amount = 50 
+    #binding.pry 
   end 
 
   def valid?
     sender.valid? && receiver.valid?
+  end 
+  
+  def execute_transaction
+    if sender.valid? 
+      transaction = sender.balance - @amount
+      deposit = receiver.balance + @amount 
+      deposit
+      transaction
+    else
+      "Transaction rejected. Please check your account balance."
+    end 
   end 
    
 end
